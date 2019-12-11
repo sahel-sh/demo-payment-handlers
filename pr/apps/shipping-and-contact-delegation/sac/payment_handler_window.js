@@ -45,7 +45,7 @@ submit.addEventListener('click', () => {
     'addressLine': [
       document.getElementById('addressLine').value,
     ],
-    'city': document.getElementById('city').value,
+    //'city': document.getElementById('city').value,
     'country': document.getElementById('country').value,
     'dependentLocality': document.getElementById('dependentLocality').value,
     'organization': document.getElementById('organization').value,
