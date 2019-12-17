@@ -55,53 +55,16 @@ function check() {
           return;
         }
         if (!registration.paymentManager.enableDelegations) {
-          hideElement('checking');
-          showElement('not-installed');
           showMessage(
               'Shipping delegation is available on chrome 80 and later. Checkout chrome://version',
           );
+          setInstruments(registration);
           return;
         }
         registration.paymentManager.enableDelegations(['shippingAddress', 'payerName', 'payerPhone', 'payerEmail'])
             .then(() => {
-              if (!registration.paymentManager.instruments) {
-                hideElement('checking');
-                showElement('not-installed');
-                showMessage(
-                    'Payment handler is not fully implemented. Cannot set the instruments.',
-                );
-                return;
-              }
-              registration.paymentManager.instruments.has('instrument-key')
-                  .then(result => {
-                    if (!result) {
-                      hideElement('checking');
-                      showElement('not-installed');
-                      showMessage(
-                          'No instruments found. Did installation fail?');
-                    } else {
-                      registration.paymentManager.instruments
-                          .get('instrument-key')
-                          .then(instrument => {
-                            document.getElementById('method').innerHTML =
-                                instrument.enabledMethods || instrument.method;
-                            document.getElementById('network').innerHTML =
-                                instrument.capabilities.supportedNetworks;
-                            hideElement('checking');
-                            showElement('installed');
-                          })
-                          .catch(error => {
-                            hideElement('checking');
-                            showElement('not-installed');
-                            showMessage(error);
-                          });
-                    }
-                  })
-                  .catch(error => {
-                    hideElement('checking');
-                    showElement('not-installed');
-                    showMessage(error);
-                  });
+              setInstruments(registration);
+              return;
             })
             .catch(error => {
               hideElement('checking');
