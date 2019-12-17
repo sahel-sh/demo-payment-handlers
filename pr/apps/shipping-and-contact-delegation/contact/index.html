@@ -15,12 +15,12 @@
   <body>
     <div id="contents">
       <h1>
-        Payment Handler for "basic-card" and delegation
+        Payment Handler for "basic-card" and contact only delegation
       </h1>
       <p>
         This is a simple payment handler for "basic-card" which provides
-        shipping address and payer's contact info whenever needed. It does not
-        open a window for user interaction.
+        payer's contact info whenever needed. It does not open a window for
+        user interaction.
       </p>
       <p id="checking">
         Checking whether the payment handler is installed...
@@ -28,7 +28,6 @@
       <div id="installed" style="display: none;">
         <p>
           The payment handler is installed. Test <a href=
-          "../../../single/">shipping</a> or <a href=
           "../../../contact/">contact</a> requested.
         </p>
         <ul>
@@ -61,7 +60,7 @@
           "../../../single/">Verify</a>.
         </p>
         <p>
-          <button onclick="install();">Install</button>
+          <button onclick="install(['payerName', 'payerPhone', 'payerEmail']);">Install</button>
         </p>
       </div>
       <pre id="msg"></pre>
