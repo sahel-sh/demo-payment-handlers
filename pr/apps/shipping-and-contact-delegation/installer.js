@@ -80,6 +80,7 @@ function check() {
 }
 
 function install(delegations = ['shippingAddress', 'payerName', 'payerPhone', 'payerEmail']) {
+  console.log(delegations);
   hideElements();
   showElement('installing');
 
