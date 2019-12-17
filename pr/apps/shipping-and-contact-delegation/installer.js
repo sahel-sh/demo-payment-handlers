@@ -28,7 +28,7 @@ function hideElements() {
   }
 }
 
-function check() {
+function check(delegations = ['shippingAddress', 'payerName', 'payerPhone', 'payerEmail']) {
   clearMessages();
   hideElements();
   showElement('checking');
@@ -61,7 +61,7 @@ function check() {
           setInstruments(registration);
           return;
         }
-        registration.paymentManager.enableDelegations(['shippingAddress', 'payerName', 'payerPhone', 'payerEmail'])
+        registration.paymentManager.enableDelegations(delegations)
             .then(() => {
               setInstruments(registration);
               return;
@@ -189,4 +189,3 @@ function uninstall() {
       });
 }
 
-check();
