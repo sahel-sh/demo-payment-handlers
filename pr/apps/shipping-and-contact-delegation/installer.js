@@ -116,7 +116,7 @@ function check() {
       });
 }
 
-function install() {
+function install(delegations = ['shippingAddress', 'payerName', 'payerPhone', 'payerEmail']) {
   hideElements();
   showElement('installing');
 
@@ -133,53 +133,15 @@ function install() {
           return;
         }
         if (!registration.paymentManager.enableDelegations) {
-          hideElement('checking');
-          showElement('not-installed');
           showMessage(
               'Shipping delegation is available on chrome 80 and later. Checkout chrome://version',
           );
+          setInstruments(registration);
           return;
         }
-        registration.paymentManager.enableDelegations(['shippingAddress', 'payerName', 'payerPhone', 'payerEmail'])
+        registration.paymentManager.enableDelegations(delegations)
             .then(() => {
-              if (!registration.paymentManager.instruments) {
-                hideElement('installing');
-                showMessage(
-                    'Payment handler is not fully implemented. Cannot set the instruments.',
-                );
-                return;
-              }
-              registration.paymentManager.instruments
-                  .set('instrument-key', {
-                    name: 'Chrome uses name and icon from the web app manifest',
-                    enabledMethods: ['basic-card'],
-                    method: 'basic-card',
-                    capabilities: {
-                      supportedNetworks: ['visa'],
-                    },
-                  })
-                  .then(() => {
-                    registration.paymentManager.instruments
-                        .get('instrument-key')
-                        .then(instrument => {
-                          document.getElementById('scope').innerHTML =
-                              registration.scope;
-                          document.getElementById('method').innerHTML =
-                              instrument.enabledMethods || instrument.method;
-                          document.getElementById('network').innerHTML =
-                              instrument.capabilities.supportedNetworks;
-                          hideElement('installing');
-                          showElement('installed');
-                        })
-                        .catch(error => {
-                          hideElement('installing');
-                          showMessage(error);
-                        });
-                  })
-                  .catch(error => {
-                    hideElement('installing');
-                    showMessage(error);
-                  });
+              setInstruments(registration);
             })
             .catch(error => {
               hideElement('installing');
@@ -191,6 +153,47 @@ function install() {
         showMessage(error);
       });
 }
+
+function setInstruments(registration) {
+  if (!registration.paymentManager.instruments) {
+    hideElement('installing');
+    showMessage(
+        'Payment handler is not fully implemented. Cannot set the instruments.',
+    );
+    return;
+  }
+  registration.paymentManager.instruments
+      .set('instrument-key', {
+        name: 'Chrome uses name and icon from the web app manifest',
+        enabledMethods: ['basic-card'],
+        method: 'basic-card',
+        capabilities: {
+          supportedNetworks: ['visa'],
+        },
+      })
+      .then(() => {
+        registration.paymentManager.instruments
+            .get('instrument-key')
+            .then(instrument => {
+              document.getElementById('scope').innerHTML =
+                  registration.scope;
+              document.getElementById('method').innerHTML =
+                  instrument.enabledMethods || instrument.method;
+              document.getElementById('network').innerHTML =
+                  instrument.capabilities.supportedNetworks;
+              hideElement('installing');
+              showElement('installed');
+            })
+            .catch(error => {
+              hideElement('installing');
+              showMessage(error);
+            });
+      })
+      .catch(error => {
+        hideElement('installing');
+        showMessage(error);
+      });
+} 
 
 function uninstall() {
   hideElements();
