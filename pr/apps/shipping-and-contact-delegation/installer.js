@@ -28,7 +28,9 @@ function hideElements() {
   }
 }
 
-function check(delegations = ['shippingAddress', 'payerName', 'payerPhone', 'payerEmail']) {
+function check(
+    delegations =
+        ['shippingAddress', 'payerName', 'payerPhone', 'payerEmail']) {
   clearMessages();
   hideElements();
   showElement('checking');
@@ -79,8 +81,9 @@ function check(delegations = ['shippingAddress', 'payerName', 'payerPhone', 'pay
       });
 }
 
-function install(delegations = ['shippingAddress', 'payerName', 'payerPhone', 'payerEmail']) {
-  console.log(delegations);
+function install(
+    delegations =
+        ['shippingAddress', 'payerName', 'payerPhone', 'payerEmail']) {
   hideElements();
   showElement('installing');
 
@@ -136,11 +139,9 @@ function setInstruments(registration) {
         },
       })
       .then(() => {
-        registration.paymentManager.instruments
-            .get('instrument-key')
+        registration.paymentManager.instruments.get('instrument-key')
             .then(instrument => {
-              document.getElementById('scope').innerHTML =
-                  registration.scope;
+              document.getElementById('scope').innerHTML = registration.scope;
               document.getElementById('method').innerHTML =
                   instrument.enabledMethods || instrument.method;
               document.getElementById('network').innerHTML =
@@ -157,7 +158,7 @@ function setInstruments(registration) {
         hideElement('installing');
         showMessage(error);
       });
-} 
+}
 
 function uninstall() {
   hideElements();
@@ -188,4 +189,3 @@ function uninstall() {
         showMessage(error);
       });
 }
-

@@ -18,7 +18,7 @@ function sendMessage(msg) {
 }
 
 function notifyPaymentMethodChanged() {
-  self.paymentRequestEvent.changePaymentMethod(null, redact(self.response)).then((paymentMethodChangeResponse) => {
+  self.paymentRequestEvent.changePaymentMethod(self.response.methodName, redact(self.response)).then((paymentMethodChangeResponse) => {
     sendMessage(paymentMethodChangeResponse);
   }).catch((error) => {
     sendMessage({error: error.message});
