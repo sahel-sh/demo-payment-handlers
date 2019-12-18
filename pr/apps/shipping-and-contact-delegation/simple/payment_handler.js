@@ -53,16 +53,13 @@ self.addEventListener('paymentrequest', (evt) => {
     evt.delegateToWindow('payment_handler_window.html');
     return;
   }
-
   // Populate response fields based on specified options in the request.
-  self.response.payerName: evt.paymentOptions.requestPayerName ? 'Jon Doe' : '';
-  self.response.payerEmail: evt.paymentOptions.requestPayerEmail ?
-      'jon.doe@gmail.com' :
-      '';
-  self.response.payerPhone: evt.paymentOptions.requestPayerPhone ?
-      '+15555555555' :
-      '';
-  self.response.shippingAddress: evt.paymentOptions.requestShipping ? {
+  self.response.payerName = evt.paymentOptions.requestPayerName ? 'Jon Doe' : '';
+  self.response.payerEmail =
+      evt.paymentOptions.requestPayerEmail ? 'jon.doe@gmail.com' : '';
+  self.response.payerPhone =
+      evt.paymentOptions.requestPayerPhone ? '+15555555555' : '';
+  self.response.shippingAddress = evt.paymentOptions.requestShipping ? {
     city: 'Reston',
     country: 'US',
     dependentLocality: '',
@@ -76,10 +73,10 @@ self.addEventListener('paymentrequest', (evt) => {
       '1875 Explorer St #1000',
     ],
   } :
-                                                                      {};
-  self.response.shippingOption: evt.paymentOptions.requestShipping ?
-      findSelectedShippingOptionId(evt.shippingOptions) :
-      '';
+                                                                       {};
+  self.response.shippingOption = evt.paymentOptions.requestShipping ?
+    findSelectedShippingOptionId(evt.shippingOptions) :
+    '';
 
   evt.respondWith(new Promise((resolve) => {
     self.resolver = resolve;
