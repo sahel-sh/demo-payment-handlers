@@ -84,7 +84,7 @@ self.addEventListener('paymentrequest', (evt) => {
         .then((windowClient) => {
           self.messageDestination = windowClient;
           self.messageDestination.postMessage({
-            'total' : evt.total;
+            'total' : evt.total,
           });
         })
         .catch((error) => {
