@@ -10,17 +10,13 @@
     <link rel="manifest" href="manifest.json">
 </head>
 
-
-<script src="../installer.js"></script>
-<script src="/redirect.js"></script>
-
 <body>
     <div id="contents">
         <h1>Payment handler for testing shipping option change event and invalid shipping option error</h1>
         <p>This is a simple payment handler for testing shipping option change
         event. It uses "basic-card" payment method.</p>
 
-        <p id="checking"  onload="check();">Checking whether the payment handler is installed...</p>
+        <p id="checking">Checking whether the payment handler is installed...</p>
 
         <div id="installed" style="display: none;">
             <p>The payment handler is installed. <a href="../../../multi/">Test it
@@ -61,6 +57,8 @@
             </ul>
         </div>
     </div>
+    <script src="../installer.js"></script>
+    <script src="/redirect.js"></script>
 </body>
 
 </html>

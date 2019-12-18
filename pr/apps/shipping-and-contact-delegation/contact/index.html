@@ -22,7 +22,7 @@
         payer's contact info whenever needed. It does not open a window for
         user interaction.
       </p>
-      <p id="checking" onload="check(['payerName', 'payerPhone', 'payerEmail']);">
+      <p id="checking">
         Checking whether the payment handler is installed...
       </p>
       <div id="installed" style="display: none;">
@@ -60,7 +60,7 @@
           "../../../single/">Verify</a>.
         </p>
         <p>
-          <button onclick="install(['payerName', 'payerPhone', 'payerEmail']);">Install</button>
+          <button id="install" onclick="install(['payerName', 'payerPhone', 'payerEmail']);">Install</button>
         </p>
       </div>
       <pre id="msg"></pre>
@@ -83,5 +83,8 @@
     </div>
     <script src="../installer.js"></script> 
     <script src="/redirect.js"></script>
+    <script type="text/javascript">
+      check(['payerName', 'payerPhone', 'payerEmail']);
+    </script>
   </body>
 </html>
