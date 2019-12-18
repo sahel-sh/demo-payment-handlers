@@ -83,7 +83,9 @@ self.addEventListener('paymentrequest', (evt) => {
     evt.openWindow('payment_handler_window.html')
         .then((windowClient) => {
           self.messageDestination = windowClient;
-          self.messageDestination.postMessage(evt);
+          self.messageDestination.postMessage({
+            'total' : evt.total;
+          });
         })
         .catch((error) => {
           console.log(error.message);
