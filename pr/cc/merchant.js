@@ -20,37 +20,37 @@ function buildPaymentRequest() {
     total: {
       label: 'Donation',
       amount: {
-        currency: 'USD',
-        value: '55.00'
+        currency: 'ریال',
+        value: '550000'
       }
     },
     displayItems: [{
       label: 'Original donation amount',
       amount: {
-        currency: 'USD',
-        value: '65.00'
+        currency: 'ریال',
+        value: '650000'
       }
     }, {
       label: 'Friends and family discount',
       amount: {
-        currency: 'USD',
-        value: '-10.00'
+        currency: 'ریال',
+        value: '-100000'
       }
     }],
     modifiers: [{
       supportedMethods: 'basic-card',
       total: {
-        label: 'Discounted donation',
+        label: 'اهدا با تخفیف',
         amount: {
-          currency: 'USD',
-          value: '45.00'
+          currency: 'ریال',
+          value: '450000'
         }
       },
       additionalDisplayItems: [{
-        label: 'VISA discount',
+        label: 'تخفیف ویزا کارت',
         amount: {
-          currency: 'USD',
-          value: '-10.00'
+          currency: 'ریال',
+          value: '-100000'
         }
       }],
       data: {
